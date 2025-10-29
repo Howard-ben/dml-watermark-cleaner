@@ -1,50 +1,41 @@
-let videoFile = "";
-let selection = { x: 0, y: 0, w: 0, h: 0 };
-
-function uploadVideo() {
-    if (!document.getElementById("terms").checked) {
-        alert("Please agree you own rights to this content.");
-        return;
-    }
-
-    const file = document.getElementById("file").files[0];
-    const formData = new FormData();
-    formData.append("video", file);
-
-    fetch("/upload", { method: "POST", body: formData })
-        .then(r => r.json())
-        .then(d => {
-            videoFile = d.video;
-            document.getElementById("preview").src = `/processed/${d.frame}`;
-            document.getElementById("preview-section").style.display = "block";
-        });
+body {
+    background: #1c1c1c;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 40px;
 }
 
-function selectArea(e) {
-    const img = e.target;
-    const rect = img.getBoundingClientRect();
-
-    selection.x = Math.round(e.clientX - rect.left);
-    selection.y = Math.round(e.clientY - rect.top);
-    selection.w = 120;
-    selection.h = 60;
-
-    document.getElementById("clean-btn").style.display = "block";
+.container {
+    background: #292929;
+    width: 450px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
 }
 
-function cleanVideo() {
-    const form = new FormData();
-    form.append("video", videoFile);
-    form.append("x", selection.x);
-    form.append("y", selection.y);
-    form.append("w", selection.w);
-    form.append("h", selection.h);
+button {
+    margin-top: 10px;
+    padding: 10px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-    fetch("/process", { method: "POST", body: form })
-        .then(r => r.json())
-        .then(d => {
-            document.getElementById("download-link").href = `/download/${d.output}`;
-            document.getElementById("download-link").style.display = "block";
-            document.getElementById("download-link").innerText = "Download Cleaned Video ✅";
-        });
+button:hover {
+    background: #3e8e41;
+}
+
+#preview {
+    margin-top: 15px;
+    width: 90%;
+    border: 2px solid white;
+    cursor: crosshair;
+}
+#clean-btn,
+#download-link {
+    display: none;
+    margin-top: 15px;
 }

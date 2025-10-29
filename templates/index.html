@@ -1,29 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>DML Watermark Cleaner</title>
-    <link rel="stylesheet" href="/static/style.css">
+  <meta charset="UTF-8">
+  <title>DML Watermark Cleaner</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+<header><h1>DML Watermark Cleaner ✅</h1></header>
 
-<h2>✅ DML Watermark Cleaner</h2>
-
-<label class="agree">
-    <input type="checkbox" id="terms"> I confirm I own the rights to this video
-</label>
-
-<input id="file" type="file" accept="video/*">
-<button onclick="uploadVideo()">Upload</button>
-
-<div id="preview-section" style="display:none;">
-    <h3>Select Watermark Area</h3>
-    <img id="preview" onclick="selectArea(event)">
+<div class="tabs">
+  <button id="imgTab" class="active">🖼 Remove Image Watermark</button>
+  <button id="vidTab">🎥 Remove Video Watermark</button>
 </div>
 
-<button id="clean-btn" style="display:none;" onclick="cleanVideo()">Clean Watermark</button>
+<div id="status" class="status"></div>
 
-<a id="download-link" style="display:none;">Download Cleaned Video</a>
+<!-- IMAGE PANEL -->
+<div id="imagePanel">
+  <input type="file" id="imgFile" accept="image/*">
+  <canvas id="imgCanvas" class="canvas"></canvas>
+  <div class="controls">
+    <button id="clearMaskBtn">Clear Mask</button>
+    <button id="downloadMaskBtn">Download Mask</button>
+    <button id="cleanImageBtn">Clean Image</button>
+  </div>
+</div>
 
-<script src="/static/script.js"></script>
+<!-- VIDEO PANEL -->
+<div id="videoPanel" class="hidden">
+  <input type="file" id="vidFile" accept="video/*">
+  <video id="vidPreview" controls></video>
+  <button id="captureFrameBtn">Capture Frame</button>
+  <canvas id="vidCanvas" class="canvas"></canvas>
+  <div class="controls">
+    <button id="clearVidMaskBtn">Clear Mask</button>
+    <button id="cleanVideoBtn">Clean Video</button>
+  </div>
+</div>
+
+<footer>Made with ❤️ — DML Tools</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
