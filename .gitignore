@@ -1,0 +1,7 @@
+uploads/
+processed/
+*.mp4
+*.jpg
+*.png
+*.avi
+.DS_Store
