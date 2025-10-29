@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DML Watermark Cleaner</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h2>✅ DML Watermark Cleaner</h2>
+
+<label class="agree">
+    <input type="checkbox" id="terms"> I confirm I own the rights to this video
+</label>
+
+<input id="file" type="file" accept="video/*">
+<button onclick="uploadVideo()">Upload</button>
+
+<div id="preview-section" style="display:none;">
+    <h3>Select Watermark Area</h3>
+    <img id="preview" onclick="selectArea(event)">
+</div>
+
+<button id="clean-btn" style="display:none;" onclick="cleanVideo()">Clean Watermark</button>
+
+<a id="download-link" style="display:none;">Download Cleaned Video</a>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
